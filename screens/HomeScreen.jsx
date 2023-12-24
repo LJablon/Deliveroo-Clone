@@ -6,7 +6,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   UserIcon,
@@ -16,14 +16,34 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+// import sanityClient from "../sanity";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+  const [featuredCategories, setFeaturedCategories] = useState([])
+
+  // for when the UI loads
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  // // for when components loads
+  // useEffect(() => {
+  //   sanityClient.fetch(`
+  //     *[_type == "featured"] {
+  //       ...,
+  //       restaurants[]->{
+  //         ...,
+  //         dishes[]->
+  //       }
+  //     }`).then(data => {
+  //       setFeaturedCategories(data);
+  //     });
+  // }, []);
+
+
 
   return (
     <SafeAreaView className="bg-white pt-5">
@@ -80,4 +100,4 @@ export default function HomeScreen() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
