@@ -16,7 +16,7 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
-// import sanityClient from "../sanity";
+import sanityClient from "../sanity";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -29,19 +29,19 @@ export default function HomeScreen() {
     });
   }, []);
 
-  // // for when components loads
-  // useEffect(() => {
-  //   sanityClient.fetch(`
-  //     *[_type == "featured"] {
-  //       ...,
-  //       restaurants[]->{
-  //         ...,
-  //         dishes[]->
-  //       }
-  //     }`).then(data => {
-  //       setFeaturedCategories(data);
-  //     });
-  // }, []);
+  // for when components loads
+  useEffect(() => {
+    sanityClient.fetch(`
+      *[_type == "featured"] {
+        ...,
+        restaurants[]->{
+          ...,
+          dishes[]->
+        }
+      }`).then(data => {
+        setFeaturedCategories(data);
+      });
+  }, []);
 
 
 
