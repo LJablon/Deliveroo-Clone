@@ -18,7 +18,7 @@ import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const navigation = useNavigation();
   const [featuredCategories, setFeaturedCategories] = useState([])
 
@@ -42,9 +42,7 @@ export default function HomeScreen() {
         setFeaturedCategories(data);
       });
   }, []);
-
-
-
+ 
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}
@@ -82,22 +80,20 @@ export default function HomeScreen() {
         <Categories />
 
         {/* Featured Rows*/}
-        <FeaturedRow
-          id="123"
-          title="Featured"
-          description="Paid placements from our partners"
-        />
-        <FeaturedRow
-          id="1234"
-          title="Tasty Discounts"
-          description="Everyone has been enjoying these tasty discounts!"
-        />
-        <FeaturedRow
-          id="12345"
-          title="Offers near you!"
-          description="Tasty discounts for you!"
-        />
+
+        {featuredCategories?.map((category) => {
+ 
+          return (<FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />);
+       
+        })}
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+export default HomeScreen;
