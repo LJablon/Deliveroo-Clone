@@ -1,3 +1,6 @@
+# Description
+#### Clone of the food ordering app Deliveroo Using React Native, Tailwind CSS (NativeWind), and Redux for the frontend and sanity for the backend.
+
 # 1) Clone Repository
 
 # 2) Run 'yarn install' 
