@@ -105,15 +105,15 @@ const BasketScreen = () => {
             </View>
             <View className="flex-row justify-between">
                 <Text className="text-gray-400">Delivery Fee</Text>
-                <Text className="text-gray-400"><Currency quantity={4.95} currency="USD"/></Text>
+                <Text className="text-gray-400"><Currency quantity={basketTotal > 0 ? 4.95: 0} currency="USD"/></Text>
             </View>
             <View className="flex-row justify-between">
                 <Text className="text-gray-400">Sales Tax</Text>
-                <Text className="text-gray-400"><Currency quantity={(basketTotal + 4.95) * 0.08} currency="USD"/></Text>
+                <Text className="text-gray-400"><Currency quantity={basketTotal > 0 ? (basketTotal + 4.95) * 0.08 : 0} currency="USD"/></Text>
             </View>
             <View className="flex-row justify-between">
                 <Text className="font-bold">Order Total</Text>
-                <Text className="font-extrabold"><Currency quantity={(basketTotal + 4.95) * 1.08} currency="USD"/></Text>
+                <Text className="font-extrabold"><Currency quantity={basketTotal > 0 ? ((basketTotal + 4.95) * 1.08) : 0} currency="USD"/></Text>
             </View>
 
             <TouchableOpacity onPress={navigateAndClear} className="bg-[#00CCBB] p-4 rounded-lg">
