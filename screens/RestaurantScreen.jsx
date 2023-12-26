@@ -106,7 +106,7 @@ const RestaurantScreen = () => {
         <View className="pb-36">
           <Text className="px-4 pt-4 font-bold text-xl">Menu</Text>
           {/* Dish rows */}
-          {dishes.map((dish) => (
+          {dishes.map((dish) => (    
             <DishRow //TODO: implement card
               key={dish._id}
               id={dish._id}
