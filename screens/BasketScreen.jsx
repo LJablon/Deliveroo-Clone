@@ -10,7 +10,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { selectRestaurant } from "../features/restaurantSlice";
-import { removeFromBasket, selectBasketItems, selectBasketTotal } from "../features/basketSlice";
+import { removeFromBasket, selectBasketItems, selectBasketTotal, clearBasket } from "../features/basketSlice";
 import { XCircleIcon } from "react-native-heroicons/outline";
 import { urlFor } from "../sanity";
 import Currency from "react-currency-formatter";
@@ -31,6 +31,11 @@ const BasketScreen = () => {
     }, {});
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
+
+  const navigateAndClear = () => {
+    navigation.navigate("PreparingOrderScreen");
+    dispatch(clearBasket());
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -103,10 +108,15 @@ const BasketScreen = () => {
                 <Text className="text-gray-400"><Currency quantity={4.95} currency="USD"/></Text>
             </View>
             <View className="flex-row justify-between">
-                <Text className="font-bold">Order Total</Text>
-                <Text className="font-extrabold"><Currency quantity={basketTotal + 4.95} currency="USD"/></Text>
+                <Text className="text-gray-400">Sales Tax</Text>
+                <Text className="text-gray-400"><Currency quantity={(basketTotal + 4.95) * 0.08} currency="USD"/></Text>
             </View>
-            <TouchableOpacity onPress={() => {navigation.navigate("PreparingOrderScreen")}} className="bg-[#00CCBB] p-4 rounded-lg">
+            <View className="flex-row justify-between">
+                <Text className="font-bold">Order Total</Text>
+                <Text className="font-extrabold"><Currency quantity={(basketTotal + 4.95) * 1.08} currency="USD"/></Text>
+            </View>
+
+            <TouchableOpacity onPress={navigateAndClear} className="bg-[#00CCBB] p-4 rounded-lg">
                 <Text className="text-center text-white font-bold text-lg">Place Order</Text>
             </TouchableOpacity>
         </View>
