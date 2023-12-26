@@ -10,6 +10,8 @@ const initialState = {
     address: null,
     shortDescription: null,
     dishes: null,
+    lat: null,
+    long: null,
   }
 };
 
@@ -31,6 +33,6 @@ export const restaurantSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { setRestaurant } = restaurantSlice.actions;
 
-export const selectRestaurant = (state) => state.restaurant;
+export const selectRestaurant = (state) => state.restaurant.restaurant;
 
 export default restaurantSlice.reducer;

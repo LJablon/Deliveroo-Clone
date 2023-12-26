@@ -43,6 +43,8 @@ const RestaurantScreen = () => {
       address,
       shortDescription,
       dishes,
+      lat, 
+      long,
     }));
   }, [dispatch]);
 
